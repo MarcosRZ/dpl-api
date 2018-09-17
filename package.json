@@ -1,0 +1,25 @@
+{
+  "name": "dpl-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf .dist && babel src --out-dir .dist/src --copy-files",
+    "dev": "cross-env NODE_ENV=dev nodemon -e js,json --exec babel-node src/index.js",
+    "start": "node .dist/src/index.js",
+    "compile": "rm -rf .dist && babel src --out-dir .dist/src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-plugin-inline-import": "^3.0.0",
+    "babel-plugin-transform-exponentiation-operator": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.4"
+  }
+}
