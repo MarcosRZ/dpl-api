@@ -3,7 +3,11 @@ export const helloHandler = (req, res) => {
 };
 
 export const deployHandler = (req, res) => {
-  res.send('deploy!');
+  const { body, params, file } = req;
+
+  const { project, component } = params;
+
+  res.json({ project, component, file });
 };
 
 export default { deployHandler, helloHandler };
