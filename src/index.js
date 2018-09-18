@@ -1,14 +1,17 @@
 import express from 'express';
 import colors from 'colors';
-import CONFIG from './config/app.config';
+import { DEFAULT_PORT, APP_NAME } from './config/app.config';
+import { deployHandler, helloHandler } from './handlers';
 
 const app = express();
-const port = process.argv[2] || CONFIG.DEFAULT_PORT;
+const port = process.argv[2] || DEFAULT_PORT;
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', helloHandler);
 
-app.listen(port, function () {
-  console.log(colors.green(`[${colors.magenta(CONFIG.APP_NAME)}] up and running at port [${colors.yellow(port)}]!`));
+app.post('/deploy/:project/:component', deployHandler);
+
+app.listen(port, () => {
+  console.log(
+    colors.green(`[${colors.magenta(APP_NAME)}] up and running at port [${colors.yellow(port)}]!`),
+  );
 });
