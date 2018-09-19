@@ -3,10 +3,8 @@ import bodyParser from 'body-parser';
 import colors from 'colors';
 import multer from 'multer';
 
-import { DEFAULT_PORT, APP_NAME } from './config/app.config';
+import { DEFAULT_PORT, APP_NAME, API_BASE } from './config/app.config';
 import { deployHandler, helloHandler } from './handlers';
-
-console.log(deployHandler);
 
 const fileManager = multer({ dest: 'uploads/' });
 
@@ -16,13 +14,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.argv[2] || DEFAULT_PORT;
+const apiBase = process.argv[3] || API_BASE;
 
-app.get('/', helloHandler);
+app.get(`${apiBase}/`, helloHandler);
 
-app.post('/deploy/:project/:component', fileManager.single('zip'), deployHandler);
+app.post(`${apiBase}/deploy/:project/:component`, fileManager.single('zip'), deployHandler);
 
 app.listen(port, () => {
+
+  const endpoint = `http://localhost:${port}${apiBase}`;
+
   console.log(
-    colors.green(`[${colors.magenta(APP_NAME)}] up and running at port [${colors.yellow(port)}]!`),
+    colors.green(
+      `[${colors.magenta(APP_NAME)}] up and running at [${colors.magenta(endpoint)}]!`,
+    ),
   );
 });
