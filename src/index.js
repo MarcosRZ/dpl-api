@@ -6,7 +6,9 @@ import multer from 'multer';
 import { DEFAULT_PORT, APP_NAME } from './config/app.config';
 import { deployHandler, helloHandler } from './handlers';
 
-const fileManager = multer({dest: 'uploads/'})
+console.log(deployHandler);
+
+const fileManager = multer({ dest: 'uploads/' });
 
 const app = express();
 
