@@ -1,8 +1,8 @@
 export default {
-  // appsRoot: '/c/Users/marodriguez/Desktop/apps',
-  appsRoot: 'C:\\Users\\marodriguez\\Desktop\\apps',
-  // backups: '/c/Users/marodriguez/Desktop/backups',
-  backups: 'C:\\Users\\marodriguez\\Desktop\\backups',
+  appsRoot: '/home/marcos/dpl/apps',
+  // appsRoot: 'C:\\Users\\marodriguez\\Desktop\\apps',
+  backups: '/home/marcos/dpl/backups',
+  // backups: 'C:\\Users\\marodriguez\\Desktop\\backups',
   projects: [
     // PIXEL-SUSHI
     {
@@ -57,23 +57,24 @@ export default {
     // TEST PROJECT
     {
       name: 'pixel',
-      root: '\\pixel',
+      root: '/pixel',
       apps: [
         {
           name: 'sushi',
-          root: '\\app',
+          root: '/app',
           prescripts: [
             // { command: 'npm', params: ['run', 'pm2:down'] }
           ],
           postscripts: [
-            { command: 'npm', params: ['i'] },
+            { command: 'echo', params: ['$PATH'] },
+            // { command: 'npm', params: ['i'] },
             // { command: 'npm', params: ['run', 'pm2:up'] },
-            { command: 'npm', params: ['run', 'prod'] },
+            // { command: 'npm', params: ['run', 'prod'] },
           ],
         },
         {
           name: 'example-api',
-          root: '\\api',
+          root: '/api',
           prescripts: [{ command: 'npm', params: ['run', 'pm2:down'] }],
           postscripts: [
             { command: 'npm', params: ['i'] },

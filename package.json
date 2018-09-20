@@ -19,6 +19,7 @@
     "targz": "^1.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-plugin-inline-import": "^3.0.0",
     "babel-plugin-transform-exponentiation-operator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

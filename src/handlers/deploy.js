@@ -1,11 +1,12 @@
 import fs from 'fs-extra';
 import targz from 'targz';
-import { spawnSync } from 'child_process';
+import { spawn } from 'child_process';
+
 import dplConfig from '../config/dpl.config';
 
 // See https://www.npmjs.com/package/targz for config (ignore files, compression level...)
-const backup = async (src, dest) => {
-  return new Promise((resolve, reject) => {
+const backup = async (src, dest) =>
+  new Promise((resolve, reject) => {
     console.log(`Backup [${src}, ${dest}]`);
 
     const callback = err => {
@@ -17,7 +18,6 @@ const backup = async (src, dest) => {
       targz.compress({ src, dest }, callback);
     });
   });
-};
 
 const remove = async target => {
   console.log(`Remove [${target}]`);
@@ -26,15 +26,16 @@ const remove = async target => {
 
 const createPath = dir => fs.mkdirp(dir);
 
-const copy = async (file, target) => {
-  const { originalname, location } = file;
+const copy = async (file, targetDir) =>
+  new Promise((resolve, reject) => {
+    const { originalname, location } = file;
 
-  console.log(`Copy [${location}, ${target}\\${originalname}]`);
-
-  fs.copy(location, target)
-    .then(Promise.resolve(`${target}/${originalname}`))
-    .catch(err => Promise.reject(err));
-};
+    const fullTargetPath = `${targetDir}/${originalname}`;
+    console.log(`Copy [${location}, ${fullTargetPath}]`);
+    fs.copy(location, fullTargetPath)
+      .then(() => resolve(fullTargetPath))
+      .catch(err => reject(err));
+  });
 
 const unpkg = async (src, dest) => {
   console.log(`Unpackaging [${src}, ${dest}]`);
@@ -46,11 +47,41 @@ const unpkg = async (src, dest) => {
   return targz.decompress({ src, dest }, endf);
 };
 
+const runScript = (command, params, dir) =>
+  new Promise((resolve, reject) => {
+    const initialDir = process.cwd();
+
+    process.chdir(dir);
+    console.log(`Running script: [${command} ${params.join(' ')}] in [${dir}]`);
+
+    // Notice how your arguments are in an array of strings
+    const child = spawn(command, params);
+
+    child.stdout.on('data', data => {
+      process.stdout.write(data);
+    });
+
+    child.stderr.on('data', data => {
+      process.stdout.write(data);
+      process.chdir(initialDir);
+      reject(data);
+    });
+
+    child.on('exit', data => {
+      process.stdout.write("I'm done!");
+      process.chdir(initialDir);
+      resolve(true);
+    });
+  });
+
+const install = dir => runScript('npm', ['i'], dir);
+const up = dir => runScript('npm', ['run', 'prod', '&'], dir);
+
 const execPostScripts = scripts => {
   console.log('Executting post scripts...');
   scripts.forEach(s => {
-    console.log(`-> ${s.command}${s.params.join(' ')}`);
-    spawnSync(s.command, s.params);
+    console.log(`-> ${s.command} ${s.params.join(' ')}`);
+    console.log(spawnSync(s.command, s.params));
   });
 };
 
@@ -114,12 +145,14 @@ const deploy = async (req, res) => {
   // Copy zip to $target
   const fileCopy = await copy(file, deployTarget);
 
-  return res.send({});
   // Unzip in $target
   await unpkg(fileCopy, deployTarget);
 
   // Exec postscripts
-  execPostScripts(postscripts);
+  // execPostScripts(postscripts);
+
+  await install(deployTarget);
+  up(deployTarget);
 
   // Cleanup uploaded & copy
 
