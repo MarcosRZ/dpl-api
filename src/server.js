@@ -6,7 +6,7 @@ import multer from 'multer';
 import { DEFAULT_PORT, APP_NAME, API_BASE } from './config/app.config';
 import { deployHandler, helloHandler } from './handlers';
 
-const fileManager = multer({ dest: 'uploads/' });
+const fileManager = multer({ dest: 'uploads' });
 
 const app = express();
 
@@ -18,7 +18,7 @@ const apiBase = process.argv[3] || API_BASE;
 
 app.get(`${apiBase}/`, helloHandler);
 
-app.post(`${apiBase}/deploy/:project/:component`, fileManager.single('zip'), deployHandler);
+app.post(`${apiBase}/deploy/:project/:app`, fileManager.single('zip'), deployHandler);
 
 app.listen(port, () => {
 
