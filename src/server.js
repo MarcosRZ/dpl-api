@@ -4,7 +4,7 @@ import colors from 'colors';
 import multer from 'multer';
 
 import { DEFAULT_PORT, APP_NAME, API_BASE } from './config/app.config';
-import { deployHandler, helloHandler } from './handlers';
+import { deployHandler, helloHandler, runHandler } from './handlers';
 
 const fileManager = multer({ dest: 'uploads' });
 
@@ -17,6 +17,7 @@ const port = process.argv[2] || DEFAULT_PORT;
 const apiBase = process.argv[3] || API_BASE;
 
 app.get(`${apiBase}/`, helloHandler);
+app.get(`${apiBase}/run`, runHandler);
 
 app.post(`${apiBase}/deploy/:project/:app`, fileManager.single('zip'), deployHandler);
 
