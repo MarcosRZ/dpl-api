@@ -3,7 +3,7 @@
 processName=pixel-sushi-app
 project=pixel-sushi
 app=app
-repo=https://msucaro:v1ll4r@bitbucket.org/msucaro/pixel-sushi.git
+repo=https://msucaro:@bitbucket.org/msucaro/pixel-sushi.git
 upstreamBranch=develop
 
 
