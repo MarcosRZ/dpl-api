@@ -1,5 +1,5 @@
-export const APP_NAME = 'Pixel Sushi';
-export const APP_NAME2 = 'P1x3l 5v5h1';
+export const APP_NAME = 'DPL';
+export const APP_NAME2 = '';
 
 export const APP_AUTHOR = 'MarcosRZ';
 
