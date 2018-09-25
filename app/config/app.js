@@ -16,6 +16,6 @@ export const NETWORKS = {
 
 export const ADDRESS = {
   NAME: 'Marcos Rodríguez Martínez',
-  LINE1: 'C/ Hernán Cortés, Nº 12, 5º I',
-  LINE2: '33213, Gijón, Asturias'
+  LINE1: '',
+  LINE2: ''
 };
