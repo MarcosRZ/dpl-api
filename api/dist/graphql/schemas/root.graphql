@@ -1,0 +1,16 @@
+scalar Date
+
+type RootQuery {
+  posts (skip: Int, limit: Int): [Post]
+}
+
+type RootMutation {
+  createPost(post: PostDataModel): CreatePostResult
+  updatePost(post: PostDataModel): UpdatePostResult
+  deletePost(_id: ID!): DeletePostResult
+}
+
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}

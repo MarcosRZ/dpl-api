@@ -1,0 +1,10 @@
+[
+  {
+    "key": "home",
+    "pattern": "/",
+    "target": "/Home",
+    "props": {
+      "title": "Home"
+    }
+  }
+]
