@@ -15,6 +15,11 @@ const Menu = props => {
               <a>Home</a>
             </Xlink>
           </li>
+          <li>
+            <Xlink href="/" prefetch>
+              <a>Home</a>
+            </Xlink>
+          </li>
         </ul>
         <a role="presentation" className="close" onClick={handleCloseClick}>
           Close

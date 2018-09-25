@@ -13,9 +13,7 @@ class Home extends React.PureComponent {
     return (
       <Jumbotron>
         <h1>{APP_NAME}</h1>
-        <p>
-         {APP_DESCRIPTION}
-        </p>
+        <p>{APP_DESCRIPTION}</p>
         <p>
           <Button bsStyle="primary">Learn more</Button>
         </p>
