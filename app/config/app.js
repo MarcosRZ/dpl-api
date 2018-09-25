@@ -1,5 +1,6 @@
 export const APP_NAME = 'DPL';
 export const APP_NAME2 = '';
+export const APP_DESCRIPTION = 'Deploy API';
 
 export const APP_AUTHOR = 'MarcosRZ';
 
