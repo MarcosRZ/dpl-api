@@ -36,7 +36,6 @@ npm run build
 rm -rf $projects/$project/$app
 
 # Copy
-shopt -s dotglob # for considering dot files (turn on dot files)
 cp -a dist $projects/$project/$app
 
 # Chdir

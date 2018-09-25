@@ -22,12 +22,9 @@ app.get(`${apiBase}/run`, runHandler);
 app.post(`${apiBase}/deploy/:project/:app`, fileManager.single('zip'), deployHandler);
 
 app.listen(port, () => {
-
   const endpoint = `http://localhost:${port}${apiBase}`;
 
   console.log(
-    colors.green(
-      `[${colors.magenta(APP_NAME)}] up and running at [${colors.magenta(endpoint)}]!`,
-    ),
+    colors.green(`[${colors.magenta(APP_NAME)}] up and running at [${colors.magenta(endpoint)}]!`),
   );
 });
