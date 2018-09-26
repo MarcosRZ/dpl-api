@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 import colors from "colors";
 import mongoose from "mongoose";
+import { isProductionEnv } from "../config";
 import config from "./config/mongo";
 
 export default {
-  start: () => {
+  start: async ({ debug } = {}) => {
     return new Promise((resolve, reject) => {
       const mongoUrl = config.MONGO_URL;
 
       mongoose.Promise = global.Promise;
-      mongoose.set("debug", true);
+      mongoose.set("debug", debug);
 
       try {
         mongoose.connect(mongoUrl);
@@ -19,7 +20,7 @@ export default {
 
       mongoose.connection
         .once("open", () => {
-          console.log(colors.green("🍃  Connected to MongoDB"));
+          console.log(colors.blue("🍃  Connected to MongoDB"));
           resolve(true);
         })
         .on("error", e => {

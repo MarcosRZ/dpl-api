@@ -28,19 +28,31 @@ var _db2 = _interopRequireDefault(_db);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// console.log(process.env.NODE_ENV);
+
 // import graphqlMiddleware from './middleware/graphql';
-_db2.default.start();
+const init = async () => {
+  try {
+    // Connect with DB. Await connection...
+    await _db2.default.start();
 
-const app = (0, _express2.default)();
+    // Configure Express HTTP Server
+    const app = (0, _express2.default)();
+    app.use(_bodyParser2.default.json({ limit: "1000mb" }));
+    app.use(_bodyParser2.default.urlencoded({ extended: true }));
+    app.use(_auth2.default);
 
-app.use(_bodyParser2.default.json({ limit: "1000mb" }));
-app.use(_bodyParser2.default.urlencoded({ extended: true }));
-app.use(_auth2.default);
+    // Apply Apollo Server middleware
+    const apolloServer = (0, _apolloServer2.default)(app, { subscriptions: true }, { path: _config.API_MOUNTPOINT });
 
-const apolloServer = (0, _apolloServer2.default)(app, { subscriptions: true }, { path: "/api" });
-
-app.listen({ port: _config.PORT }, err => {
-  if (err) {
+    // Turn on HTTP Server.
+    app.listen({ port: _config.PORT }, err => {
+      if (err) throw err;
+      console.log(_colors2.default.green(`🛰️  API listening at localhost:${_config.PORT}${apolloServer.graphqlPath}`));
+    });
+  } catch (err) {
     console.error(_colors2.default.red(err));
-  } else console.log(_colors2.default.green(`🛰️  API listening at localhost:${_config.PORT}${apolloServer.graphqlPath}`));
-});
+  }
+};
+
+init();
