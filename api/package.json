@@ -46,7 +46,7 @@
     "build": "gulp build",
     "build:babel": "rm -rf dist && babel src --out-dir dist --copy-files",
     "dev": "cross-env NODE_ENV=dev nodemon -e js,graphql,json --exec babel-node src/server.js",
-    "prod": "node server.js",
+    "prod": "cross-env NODE_ENV=production node server.js",
     "pm2:up": "pm2 start npm --name pixel-sushi-api -- run prod",
     "pm2:down": "pm2 stop pixel-sushi-api"
   },

@@ -28,13 +28,13 @@ var _db2 = _interopRequireDefault(_db);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// console.log(process.env.NODE_ENV);
-
 // import graphqlMiddleware from './middleware/graphql';
+console.log(_colors2.default.blue(`🏭  Enviroment is [${_colors2.default.yellow(process.env.NODE_ENV)}]`));
+
 const init = async () => {
   try {
     // Connect with DB. Await connection...
-    await _db2.default.start();
+    await _db2.default.start({ debug: !(0, _config.isProductionEnv)() });
 
     // Configure Express HTTP Server
     const app = (0, _express2.default)();
@@ -45,10 +45,12 @@ const init = async () => {
     // Apply Apollo Server middleware
     const apolloServer = (0, _apolloServer2.default)(app, { subscriptions: true }, { path: _config.API_MOUNTPOINT });
 
+    const API_PATH = `localhost:${_config.PORT}${apolloServer.graphqlPath}`;
+
     // Turn on HTTP Server.
     app.listen({ port: _config.PORT }, err => {
       if (err) throw err;
-      console.log(_colors2.default.green(`🛰️  API listening at localhost:${_config.PORT}${apolloServer.graphqlPath}`));
+      console.log(_colors2.default.blue(`🛰️  API listening at [${_colors2.default.yellow(API_PATH)}]`));
     });
   } catch (err) {
     console.error(_colors2.default.red(err));

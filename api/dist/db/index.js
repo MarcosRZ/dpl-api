@@ -22,12 +22,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* eslint-disable no-console */
 exports.default = {
-  start: async () => {
+  start: async ({ debug } = {}) => {
     return new Promise((resolve, reject) => {
       const mongoUrl = _mongo2.default.MONGO_URL;
 
       _mongoose2.default.Promise = global.Promise;
-      _mongoose2.default.set("debug", (0, _config.isProductionEnv)());
+      _mongoose2.default.set("debug", debug);
 
       try {
         _mongoose2.default.connect(mongoUrl);
@@ -36,7 +36,7 @@ exports.default = {
       }
 
       _mongoose2.default.connection.once("open", () => {
-        console.log(_colors2.default.green("🍃  Connected to MongoDB"));
+        console.log(_colors2.default.blue("🍃  Connected to MongoDB"));
         resolve(true);
       }).on("error", e => {
         reject(e);

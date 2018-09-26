@@ -7,20 +7,28 @@ var sftp = require('gulp-sftp');
 var del = require('del');
 var runSequence = require('run-sequence');
 
-const USER = 'root'
+const USER = 'root';
 const SERVER_NAME = 'marcosrgz.com';
 const TARGET_PATH = '/root/apps/app1';
 
 const transpile = ['server.js', 'routing/*.js', 'config/*.js'];
-const copy = ['.next/**', 'package.json', 'routing/routes.json', 'static/css/**','static/fonts/**', 'static/images/**', 'static/js/**'];
+const copy = ['.next/**', 'package.json', 'routing/routes.json', 'static/**'];
+// const copy = ['.next/**', 'package.json', 'routing/routes.json', 'static/css/**','static/fonts/**', 'static/images/**', 'static/js/**'];
 
 // Full build process execution.
 // Tasks (in order): clean -> next-build -> transpile -> copy
 // Once this task is completed, there is an executable next project inside dist/
-gulp.task('build', function(done){
-  runSequence('clean', 'build:next','build:css', 'transpile', 'copy', function(){
-    done();
-  })
+gulp.task('build', function(done) {
+  runSequence(
+    'clean',
+    'build:next',
+    'build:css',
+    'transpile',
+    'copy',
+    function() {
+      done();
+    },
+  );
 });
 
 // Deletes all dist/ contents
@@ -41,17 +49,15 @@ gulp.task('build:css', () => {
 
 // Copies files listed in 'copy' array. (See the top of this file)
 gulp.task('copy', () => {
-  gulp
-  .src(copy, {base: '.'})
-  .pipe(gulp.dest('dist'));
+  gulp.src(copy, { base: '.' }).pipe(gulp.dest('dist'));
 });
 
 // Transpiles files listed in 'copy' array. (See the top of this file)
 gulp.task('transpile', () => {
-   gulp
-   .src(transpile, {base: '.'})
-   .pipe(babel())
-   .pipe(gulp.dest('dist'))
+  gulp
+    .src(transpile, { base: '.' })
+    .pipe(babel())
+    .pipe(gulp.dest('dist'));
 });
 
 // ---------- TEST ----------
@@ -61,10 +67,11 @@ gulp.task('upload', () => {
 });
 
 gulp.task('deploy', function() {
-  gulp.src('dist/**')
-    .pipe(sftp({
+  gulp.src('dist/**').pipe(
+    sftp({
       host: SERVER_NAME,
       user: USER,
       remotePath: TARGET_PATH,
-    }));
+    }),
+  );
 });
