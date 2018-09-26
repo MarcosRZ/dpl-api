@@ -1,35 +1,33 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import graphqlMiddleware from './middleware/graphql';
-import authMiddleware from './middleware/auth';
-import { PORT } from './config';
-import db from './db';
+import colors from "colors";
+import bodyParser from "body-parser";
+import express from "express";
+// import graphqlMiddleware from './middleware/graphql';
+import configureApolloServer from "./middleware/apollo-server";
+import authMiddleware from "./middleware/auth";
+import { PORT } from "./config";
+import db from "./db";
 
 db.start();
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '1000mb' }));
+app.use(bodyParser.json({ limit: "1000mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(session);
 app.use(authMiddleware);
 
 app.use((req, res, next) => {
   next();
 });
-// app.use(cors(corsOptions));
-// app.use(
-//   apolloUploadExpress({
-//     uploadDir: constants.tmpPath,
-//   }),
-// );
-graphqlMiddleware(app);
 
-// bodyParser is needed just for POST.
-// app.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema }));
+const apolloServer = configureApolloServer(app);
 
-app.listen(PORT, (err) => {
+app.listen({ port: PORT }, err => {
   if (err) {
-    console.error(err);
-  } else console.log(`API listening at localhost:${PORT}`);
+    console.error(colors.red(err));
+  } else
+    console.log(
+      colors.green(
+        `🛰️  API listening at localhost:${PORT}${apolloServer.graphqlPath}`
+      )
+    );
 });

@@ -46,7 +46,10 @@ export default {
 
       if (!dbHost) return error('No se ha encontrado el documento en BD');
 
-      const res = await Host.updateOne({ _id: host._id }, { $set: host }).exec();
+      const res = await Host.updateOne(
+        { _id: host._id },
+        { $set: host },
+      ).exec();
 
       return res.ok === 1 ? success(host) : error(host);
     },
@@ -58,7 +61,10 @@ export default {
 
       if (!dbHost) return error('No se ha encontrado el documento en BD');
 
-      const res = await Host.updateOne({ _id }, { $set: { deletionDate: new Date() } }).exec();
+      const res = await Host.updateOne(
+        { _id },
+        { $set: { deletionDate: new Date() } },
+      ).exec();
 
       const hosts = Host.find({ deletionDate: null });
 
