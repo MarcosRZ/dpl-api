@@ -4,7 +4,7 @@ import express from "express";
 // import graphqlMiddleware from './middleware/graphql';
 import configureApolloServer from "./middleware/apollo-server";
 import authMiddleware from "./middleware/auth";
-import { PORT } from "./config";
+import { PORT, API_MOUNTPOINT } from "./config";
 import db from "./db";
 
 db.start();
@@ -18,7 +18,7 @@ app.use(authMiddleware);
 const apolloServer = configureApolloServer(
   app,
   { subscriptions: true },
-  { path: "/api" }
+  { path: API_MOUNTPOINT }
 );
 
 app.listen({ port: PORT }, err => {

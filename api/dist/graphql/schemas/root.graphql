@@ -2,12 +2,17 @@ scalar Date
 
 type RootQuery {
   posts (skip: Int, limit: Int): [Post]
+  hosts (skip: Int, limit: Int): [Host]
 }
 
 type RootMutation {
   createPost(post: PostDataModel): CreatePostResult
   updatePost(post: PostDataModel): UpdatePostResult
   deletePost(_id: ID!): DeletePostResult
+
+  createHost(host: HostDataModel): CreateHostResult
+  updateHost(host: HostDataModel): UpdateHostResult
+  deleteHost(_id: ID!): DeleteHostResult
 }
 
 schema {
