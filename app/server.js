@@ -1,4 +1,5 @@
 /* eslint no-console: "off" */
+
 import { createServer } from 'http';
 import { parse } from 'url';
 import next from 'next';
@@ -10,7 +11,7 @@ const dev = process.env.NODE_ENV !== 'production';
 console.log(`ENV: ${process.env.NODE_ENV}`);
 const app = next({ dev });
 
-function logBootInfo() {
+const logBootInfo = () => {
   console.log('- - - - - - - - - - - - - - - - - - - - -');
   console.log(' ');
   console.log(`${APP_NAME} @ http://localhost:${port}`);
@@ -18,7 +19,7 @@ function logBootInfo() {
   console.log(`${APP_AUTHOR} | ${AUTHOR_GITHUB}`);
   console.log(' ');
   console.log('- - - - - - - - - - - - - - - - - - - - -');
-}
+};
 
 app.prepare().then(() => {
   createServer((req, res) => {
@@ -34,4 +35,3 @@ app.prepare().then(() => {
     logBootInfo();
   });
 });
-
