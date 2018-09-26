@@ -15,11 +15,11 @@ app.use(bodyParser.json({ limit: "1000mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(authMiddleware);
 
-app.use((req, res, next) => {
-  next();
-});
-
-const apolloServer = configureApolloServer(app);
+const apolloServer = configureApolloServer(
+  app,
+  { subscriptions: true },
+  { path: "/api" }
+);
 
 app.listen({ port: PORT }, err => {
   if (err) {
