@@ -38,5 +38,13 @@
     "props": {
       "title": "Login"
     }
+  },
+  {
+    "key": "test",
+    "pattern": "/test",
+    "target": "/Test",
+    "props": {
+      "title": "Test"
+    }
   }
 ]

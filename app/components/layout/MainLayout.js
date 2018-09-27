@@ -51,13 +51,14 @@ class MainLayout extends PureComponent {
             <link
               rel="stylesheet"
               type="text/css"
-              href="/static/bootstrap/css/bootstrap.min.css"
+              href="/static/bootstrap/css/bootstrap4.min.css"
             />
-            <link
+            {/* <link
               rel="stylesheet"
               type="text/css"
               href="/static/bootstrap/css/bootstrap-theme.min.css"
-            />
+            /> */}
+
             <link
               rel="stylesheet"
               type="text/css"
