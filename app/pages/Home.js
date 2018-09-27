@@ -1,6 +1,5 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
 import { Button, Jumbotron } from 'react-bootstrap';
 import withMainLayout from '../HOC/withMainLayout';
 import { APP_NAME, APP_DESCRIPTION } from '../config/app';
@@ -22,16 +21,21 @@ class Home extends React.PureComponent {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error :(</p>;
 
-            return data.hosts.map(({ _id, name }) => (
-              <div key={_id}>
-                <p>{`${_id}: ${name}`}</p>
-              </div>
-            ));
+            if (data.hosts.length === 0) return <p>No results</p>;
+
+            return (
+              <table className="table table-responsive">
+                {data.hosts.map(({ _id, name }) => (
+                  <tr>
+                    <td>{_id}</td>
+                    <td>{name}</td>
+                  </tr>
+                ))}
+              </table>
+            );
           }}
         </Query>
-        <p>
-          <Button bsStyle="primary">Learn more</Button>
-        </p>
+        <h1>BUAT THE FUCK</h1>
       </Jumbotron>
     );
   }

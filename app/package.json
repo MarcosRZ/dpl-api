@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "gulp build",
-    "dev": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=dev babel-node server.js",
+    "dev": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=dev nodemon -e js,graphql,json --exec babel-node server.js",
     "prod": "cross-env NODE_ENV=production node server.js",
     "next:build": "rm -rf .next && next build",
     "sass:compile": "sass static/sass/main.scss static/css/main.css",
