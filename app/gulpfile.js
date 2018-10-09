@@ -3,13 +3,8 @@
 var gulp = require('gulp');
 const babel = require('gulp-babel');
 var run = require('gulp-run');
-var sftp = require('gulp-sftp');
 var del = require('del');
 var runSequence = require('run-sequence');
-
-const USER = 'root';
-const SERVER_NAME = 'marcosrgz.com';
-const TARGET_PATH = '/root/apps/app1';
 
 const transpile = ['server.js', 'routing/*.js', 'config/*.js'];
 const copy = ['.next/**', 'package.json', 'routing/routes.json', 'static/**'];
@@ -58,20 +53,4 @@ gulp.task('transpile', () => {
     .src(transpile, { base: '.' })
     .pipe(babel())
     .pipe(gulp.dest('dist'));
-});
-
-// ---------- TEST ----------
-
-gulp.task('upload', () => {
-  run(`scp -r dist/ ${USER}@${SERVER_NAME}:${TARGET_PATH}`);
-});
-
-gulp.task('deploy', function() {
-  gulp.src('dist/**').pipe(
-    sftp({
-      host: SERVER_NAME,
-      user: USER,
-      remotePath: TARGET_PATH,
-    }),
-  );
 });

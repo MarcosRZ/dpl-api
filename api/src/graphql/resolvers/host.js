@@ -10,9 +10,7 @@ function error(msg) {
 
 export default {
   query: {
-    hosts: async (obj, { skip, limit }, ctx) => {
-      console.log('ctx: ', ctx);
-
+    hosts: async (obj, { skip, limit }) => {
       const skipVal = skip || 0;
       const limitVal = limit || 0;
 
@@ -21,6 +19,8 @@ export default {
         .skip(skipVal)
         .limit(limitVal)
         .exec();
+
+      console.log(hosts);
 
       return hosts;
     },
@@ -46,10 +46,7 @@ export default {
 
       if (!dbHost) return error('No se ha encontrado el documento en BD');
 
-      const res = await Host.updateOne(
-        { _id: host._id },
-        { $set: host },
-      ).exec();
+      const res = await Host.updateOne({ _id: host._id }, { $set: host }).exec();
 
       return res.ok === 1 ? success(host) : error(host);
     },
@@ -61,10 +58,7 @@ export default {
 
       if (!dbHost) return error('No se ha encontrado el documento en BD');
 
-      const res = await Host.updateOne(
-        { _id },
-        { $set: { deletionDate: new Date() } },
-      ).exec();
+      const res = await Host.updateOne({ _id }, { $set: { deletionDate: new Date() } }).exec();
 
       const hosts = Host.find({ deletionDate: null });
 
