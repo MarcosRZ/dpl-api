@@ -1,11 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-<<<<<<< HEAD
-import { Button, Jumbotron } from 'react-bootstrap';
-=======
 import gql from 'graphql-tag';
 import { Jumbotron, Alert, Table } from 'react-bootstrap';
->>>>>>> 0b1fa1e73eae19ca9f1225ee5f4af09d312c6141
 import withMainLayout from '../HOC/withMainLayout';
 import { APP_NAME, APP_DESCRIPTION } from '../config/app';
 import AllHostsQuery from './queries/hosts/allHosts';
@@ -27,23 +23,6 @@ class Home extends React.PureComponent {
             if (loading) return <p>Loading...</p>;
             if (error) return <p>Error :(</p>;
 
-<<<<<<< HEAD
-            if (data.hosts.length === 0) return <p>No results</p>;
-
-            return (
-              <table className="table table-responsive">
-                {data.hosts.map(({ _id, name }) => (
-                  <tr>
-                    <td>{_id}</td>
-                    <td>{name}</td>
-                  </tr>
-                ))}
-              </table>
-            );
-          }}
-        </Query>
-        <h1>BUAT THE FUCK</h1>
-=======
             return (
               <Table responsive striped condensed bordered hover>
                 <thead>
@@ -80,7 +59,6 @@ class Home extends React.PureComponent {
             React Bootstap Docs.
           </a>
         </Alert>
->>>>>>> 0b1fa1e73eae19ca9f1225ee5f4af09d312c6141
       </Jumbotron>
     );
   }
