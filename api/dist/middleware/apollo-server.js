@@ -3,36 +3,40 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
 var _apolloServerExpress = require("apollo-server-express");
 
 var _graphqlTools = require("graphql-tools");
 
-var _typeDefs = require("../graphql/schemas/typeDefs");
+var _typeDefs = _interopRequireDefault(require("../graphql/schemas/typeDefs"));
 
-var _typeDefs2 = _interopRequireDefault(_typeDefs);
-
-var _resolvers = require("../graphql/resolvers");
-
-var _resolvers2 = _interopRequireDefault(_resolvers);
+var _resolvers = _interopRequireDefault(require("../graphql/resolvers"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const schema = (0, _graphqlTools.makeExecutableSchema)({
-  typeDefs: _typeDefs2.default,
-  resolvers: _resolvers2.default
+  typeDefs: _typeDefs.default,
+  resolvers: _resolvers.default
 });
 
-exports.default = (app, serverOptions = {}, middlewareOptions = {}) => {
-  const apollo = new _apolloServerExpress.ApolloServer(Object.assign({ typeDefs: _typeDefs2.default, resolvers: _resolvers2.default }, serverOptions));
+var _default = (app, serverOptions = {}, middlewareOptions = {}) => {
+  const apollo = new _apolloServerExpress.ApolloServer({
+    typeDefs: _typeDefs.default,
+    resolvers: _resolvers.default,
+    ...serverOptions
+  }); // Apollo Server
 
-  // Apollo Server
-  apollo.applyMiddleware(Object.assign({ app }, middlewareOptions));
+  apollo.applyMiddleware({
+    app,
+    ...middlewareOptions
+  }); // Configure subscriptions
 
-  // Configure subscriptions
   if (serverOptions.subscriptions) {
     apollo.installSubscriptionHandlers(app);
   }
 
   return apollo;
 };
+
+exports.default = _default;

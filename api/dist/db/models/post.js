@@ -1,23 +1,38 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const posts = new _mongoose.Schema({
-  slug: { type: String },
-  title: { type: String },
-  _title: { type: String },
-  description: { type: String },
-  content: { type: String },
-  date: { type: Date },
-  deletionDate: { type: Date }
+const posts = _mongoose.default.Schema({
+  slug: {
+    type: String
+  },
+  title: {
+    type: String
+  },
+  _title: {
+    type: String
+  },
+  description: {
+    type: String
+  },
+  content: {
+    type: String
+  },
+  date: {
+    type: Date
+  },
+  deletionDate: {
+    type: Date
+  }
 });
 
-exports.default = _mongoose2.default.model('posts', posts);
+var _default = _mongoose.default.model('posts', posts);
+
+exports.default = _default;

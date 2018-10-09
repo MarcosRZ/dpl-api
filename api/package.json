@@ -26,7 +26,6 @@
     "@babel/plugin-transform-exponentiation-operator": "^7.1.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
     "babel-plugin-inline-import": "^3.0.0",
     "cross-env": "^5.2.0",
     "del": "^3.0.0",

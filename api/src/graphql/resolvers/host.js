@@ -20,8 +20,6 @@ export default {
         .limit(limitVal)
         .exec();
 
-      console.log(hosts);
-
       return hosts;
     },
   },
