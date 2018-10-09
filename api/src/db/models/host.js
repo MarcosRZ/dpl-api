@@ -1,6 +1,6 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-const hosts = new Schema({
+const hosts = mongoose.Schema({
   name: String,
   description: String,
   url: String,

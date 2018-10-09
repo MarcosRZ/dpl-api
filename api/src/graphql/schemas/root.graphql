@@ -1,4 +1,5 @@
 scalar Date
+scalar ObjectID
 
 type RootQuery {
   posts (skip: Int, limit: Int): [Post]
@@ -8,11 +9,11 @@ type RootQuery {
 type RootMutation {
   createPost(post: PostDataModel): CreatePostResult
   updatePost(post: PostDataModel): UpdatePostResult
-  deletePost(_id: ID!): DeletePostResult
+  deletePost(_id: String!): DeletePostResult
 
   createHost(host: HostDataModel): CreateHostResult
   updateHost(host: HostDataModel): UpdateHostResult
-  deleteHost(_id: ID!): DeleteHostResult
+  deleteHost(_id: String!): DeleteHostResult
 }
 
 schema {
