@@ -1,5 +1,6 @@
 import post from './post';
 import date from './date';
+import objectid from './objectid';
 import host from './host';
 
 export default {
@@ -12,6 +13,7 @@ export default {
     ...host.mutation,
   },
   ...date,
+  ...objectid,
   ...post.resolvers,
   ...host.resolvers,
 };
