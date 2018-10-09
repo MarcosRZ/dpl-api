@@ -1,22 +1,8 @@
 {
-  "name": "nextjs-start",
+  "name": "dpl-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scrapts": {
-    "next": "next",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=dev nodemon -e js,graphql,json --exec babel-node src/index.js",
-    "start": "node .compiled/src/index.js",
-    "start2": "cross-env NODE_ENV=production PORT=80 babel-node server.js",
-    "compile": "rm -rf .compiled && babel src --out-dir .compiled/src",
-    "buildCSS": "stylus -u autoprefixer-stylus ./styles/main.styl -o ./static/main.css",
-    "devCSS": "stylus -u autoprefixer-stylus -w ./styles/main.styl -o ./static/main.css",
-    "generateLocales": "cross-env NODE_ENV=dev babel-node generateLocales.js",
-    "cleanCaches": "rm -rf .next && npm cache clean --force && rm -rf node_modules/.cache/* && npm i",
-    "cleanCache": "rm -rf node_modules/.cache",
-    "deploy": "npm run buildCSS; cd .deploy; mupx deploy; cd .."
-  },
+  "main": "server.js",
   "scripts": {
     "build": "gulp build",
     "dev": "cross-env BABEL_DISABLE_CACHE=1 NODE_ENV=dev babel-node server.js",
@@ -54,30 +40,6 @@
     "scrollmagic": "^2.0.5",
     "url": "^0.11.0"
   },
-  "old_devDependencies": {
-    "babel-plugin-inline-import": "^3.0.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-exponentiation-operator": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.2.0",
-    "del": "^3.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.2",
-    "eslint-plugin-react": "^7.9.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-run": "^1.7.1",
-    "gulp-sftp": "^0.1.5",
-    "nodemon": "^1.18.3",
-    "run-sequence": "^2.2.1"
-  },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
@@ -101,8 +63,6 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-run": "^1.7.1",
-    "gulp-sftp": "^0.1.5",
-    "nodemon": "^1.18.3",
     "run-sequence": "^2.2.1"
   }
 }
