@@ -1,0 +1,50 @@
+[
+  {
+    "key": "home",
+    "pattern": "/",
+    "target": "/Home",
+    "props": {
+      "title": "Home"
+    }
+  },
+  {
+    "key": "hosts",
+    "pattern": "/hosts",
+    "target": "/Hosts",
+    "props": {
+      "title": "Hosts"
+    }
+  },
+  {
+    "key": "projects",
+    "pattern": "/projects",
+    "target": "/Projects",
+    "props": {
+      "title": "Projects"
+    }
+  },
+  {
+    "key": "apps",
+    "pattern": "/apps",
+    "target": "/Apps",
+    "props": {
+      "title": "Apps"
+    }
+  },
+  {
+    "key": "login",
+    "pattern": "/login",
+    "target": "/Login",
+    "props": {
+      "title": "Login"
+    }
+  },
+  {
+    "key": "test",
+    "pattern": "/test",
+    "target": "/Test",
+    "props": {
+      "title": "Test"
+    }
+  }
+]
