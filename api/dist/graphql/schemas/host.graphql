@@ -1,5 +1,5 @@
 type Host {
-  _id: ID!
+  _id: ObjectID!
   name: String
   description: String
   url: String
@@ -9,7 +9,7 @@ type Host {
 } 
 
 input HostDataModel {
-  _id: ID
+   _id: ObjectID
   name: String
   description: String
   url: String

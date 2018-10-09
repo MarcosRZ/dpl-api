@@ -1,16 +1,15 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const hosts = new _mongoose.Schema({
+const hosts = _mongoose.default.Schema({
   name: String,
   description: String,
   url: String,
@@ -18,4 +17,6 @@ const hosts = new _mongoose.Schema({
   deletionDate: Date
 });
 
-exports.default = _mongoose2.default.model('hosts', hosts);
+var _default = _mongoose.default.model('hosts', hosts);
+
+exports.default = _default;

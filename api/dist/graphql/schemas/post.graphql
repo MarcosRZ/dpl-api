@@ -1,5 +1,5 @@
 type Post {
-  _id: ID!
+   _id: ObjectID!
   title: String
   description: String
   content: String
@@ -8,7 +8,7 @@ type Post {
 } 
 
 input PostDataModel {
-  _id: ID
+   _id: ObjectID
   title: String
   description: String
   content: String

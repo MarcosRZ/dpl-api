@@ -1,16 +1,17 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _expressJwt = require('express-jwt');
-
-var _expressJwt2 = _interopRequireDefault(_expressJwt);
+var _expressJwt = _interopRequireDefault(require("express-jwt"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = (0, _expressJwt2.default)({
+var _default = (0, _expressJwt.default)({
   secret: 'somesuperdupersecret',
   credentialsRequired: false
 });
+
+exports.default = _default;

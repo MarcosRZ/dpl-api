@@ -3,40 +3,37 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _colors = require("colors");
+var _colors = _interopRequireDefault(require("colors"));
 
-var _colors2 = _interopRequireDefault(_colors);
-
-var _mongoose = require("mongoose");
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _config = require("../config");
 
-var _mongo = require("./config/mongo");
-
-var _mongo2 = _interopRequireDefault(_mongo);
+var _mongo = _interopRequireDefault(require("./config/mongo"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable no-console */
-exports.default = {
-  start: async ({ debug } = {}) => {
+var _default = {
+  start: async ({
+    debug
+  } = {}) => {
     return new Promise((resolve, reject) => {
-      const mongoUrl = _mongo2.default.MONGO_URL;
+      const mongoUrl = _mongo.default.MONGO_URL;
+      _mongoose.default.Promise = global.Promise;
 
-      _mongoose2.default.Promise = global.Promise;
-      _mongoose2.default.set("debug", debug);
+      _mongoose.default.set("debug", debug);
 
       try {
-        _mongoose2.default.connect(mongoUrl);
+        _mongoose.default.connect(mongoUrl);
       } catch (err) {
-        _mongoose2.default.createConnection(mongoUrl);
+        _mongoose.default.createConnection(mongoUrl);
       }
 
-      _mongoose2.default.connection.once("open", () => {
-        console.log(_colors2.default.blue("🍃  Connected to MongoDB"));
+      _mongoose.default.connection.once("open", () => {
+        console.log(_colors.default.blue("🍃  Connected to MongoDB"));
         resolve(true);
       }).on("error", e => {
         reject(e);
@@ -44,3 +41,4 @@ exports.default = {
     });
   }
 };
+exports.default = _default;
