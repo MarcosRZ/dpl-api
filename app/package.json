@@ -99,7 +99,7 @@
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-react": "^7.9.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
+    "gulp-babel": "^8.0.0",
     "gulp-run": "^1.7.1",
     "gulp-sftp": "^0.1.5",
     "nodemon": "^1.18.3",
