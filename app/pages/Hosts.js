@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Query } from 'react-apollo';
+import { Table } from 'react-bootstrap';
 import withMainLayout from '../HOC/withMainLayout';
+import AllHostsQuery from '../queries/hosts/allHosts';
+import XLink from '../routing/Xlink';
 
 class Hosts extends React.PureComponent {
   constructor(props) {
@@ -9,9 +13,51 @@ class Hosts extends React.PureComponent {
   }
 
   render() {
-    const { title } = this.props;
+    return (
+      <div className="page-content">
+        <h1>Hosts</h1>
+        <Query query={AllHostsQuery}>
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>;
+            if (error) return <p>Error :(</p>;
 
-    return <h1>{title}</h1>;
+            return (
+              <Table
+                responsive
+                striped
+                bordered
+                hover
+                size="sm"
+                variant="light"
+              >
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>IP</th>
+                    <th>Main Domain</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.hosts.map(({ _id, name }) => (
+                    <tr key={_id}>
+                      <td>{_id}</td>
+                      <td>{name}</td>
+                      <td>0.0.0.0</td>
+                      <td>
+                        <XLink href="/">
+                          <a>www.example.com</a>
+                        </XLink>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            );
+          }}
+        </Query>
+      </div>
+    );
   }
 }
 

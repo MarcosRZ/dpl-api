@@ -1,15 +1,21 @@
-import { ApolloServer } from "apollo-server-express";
-import { makeExecutableSchema } from "graphql-tools";
-import typeDefs from "../graphql/schemas/typeDefs";
-import resolvers from "../graphql/resolvers";
+import { ApolloServer } from 'apollo-server-express';
+import { makeExecutableSchema } from 'graphql-tools';
+import typeDefs from '../graphql/schemas/typeDefs';
+import resolvers from '../graphql/resolvers';
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers
+  resolvers,
 });
 
 export default (app, serverOptions = {}, middlewareOptions = {}) => {
-  const apollo = new ApolloServer({ typeDefs, resolvers, ...serverOptions });
+  const playground = {
+    settings: {
+      'editor.cursorShape': 'line',
+    },
+  };
+
+  const apollo = new ApolloServer({ typeDefs, resolvers, ...serverOptions, playground });
 
   // Apollo Server
   apollo.applyMiddleware({ app, ...middlewareOptions });

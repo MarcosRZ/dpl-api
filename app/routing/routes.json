@@ -16,6 +16,14 @@
     }
   },
   {
+    "key": "hosts/create",
+    "pattern": "/hosts/create",
+    "target": "/CreateHost",
+    "props": {
+      "title": "Create new Host"
+    }
+  },
+  {
     "key": "projects",
     "pattern": "/projects",
     "target": "/Projects",

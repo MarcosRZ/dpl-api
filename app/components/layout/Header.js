@@ -12,7 +12,7 @@ class Header extends React.PureComponent {
 
   render() {
     return (
-      <Navbar fixed="top" bg="dark" variant="dark" expand="sm">
+      <Navbar fixed="top" variant="dark" expand="sm" bg="primary">
         <Xlink href="/">
           <Navbar.Brand>
             {' '}
