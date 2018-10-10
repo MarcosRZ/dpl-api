@@ -1,10 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation {
-    createHost(
-      host: { name: "buat", description: "defac", url: "marcosrgz.com" }
-    ) {
+  mutation CreateHost($host: HostDataModel) {
+    createHost(host: $host) {
       OK
       error
       payload {

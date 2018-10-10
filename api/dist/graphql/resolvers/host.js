@@ -36,7 +36,6 @@ var _default = {
       }).sort({
         date: -1
       }).skip(skipVal).limit(limitVal).exec();
-      console.log(hosts);
       return hosts;
     }
   },

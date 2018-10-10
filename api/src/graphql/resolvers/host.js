@@ -25,6 +25,10 @@ export default {
   },
   mutation: {
     createHost: async (obj, args) => {
+
+
+      console.log(args)
+
       const { host } = args;
 
       if (!host) throw new Error("There's no host to create");
