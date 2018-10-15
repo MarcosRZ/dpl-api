@@ -25,13 +25,13 @@ export default {
   },
   mutation: {
     createHost: async (obj, args) => {
-
-
-      console.log(args)
+      console.log(obj, args);
 
       const { host } = args;
 
       if (!host) throw new Error("There's no host to create");
+
+      host.creationDate = new Date();
 
       const dbHost = new Host(host);
 

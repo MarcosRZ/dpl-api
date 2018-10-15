@@ -3,6 +3,7 @@ type Host {
   name: String
   description: String
   url: String
+  ip: String
   creationDate: Date
   deletionDate: Date
   # projects: [Project]
@@ -13,6 +14,7 @@ input HostDataModel {
   name: String
   description: String
   url: String
+  ip: String
   creationDate: Date
   deletionDate: Date
 }

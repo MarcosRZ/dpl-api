@@ -39,16 +39,15 @@ class Hosts extends React.PureComponent {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.hosts.map(({ _id, name }) => (
+                  {data.hosts.map(({ _id, name, ip, url, creationDate }) => (
                     <tr key={_id}>
                       <td>{_id}</td>
                       <td>{name}</td>
-                      <td>0.0.0.0</td>
+                      <td>{ip}</td>
                       <td>
-                        <XLink href="/">
-                          <a>www.example.com</a>
-                        </XLink>
+                        <a>{url}</a>
                       </td>
+                      <td>{creationDate}</td>
                     </tr>
                   ))}
                 </tbody>
